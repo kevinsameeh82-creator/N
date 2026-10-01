@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#0b8f83">
+<title>رعاية | خدمات التمريض المنزلي</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#f4fbfa;color:#173b3a}
+button,input,select{font:inherit}button{cursor:pointer;border:0}
+.header{background:linear-gradient(135deg,#087f75,#13ad9d);color:#fff;padding:22px 18px 34px;border-radius:0 0 30px 30px;box-shadow:0 8px 30px #087f7525}
+.top{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.logo{display:flex;align-items:center;gap:12px}.logoIcon{width:48px;height:48px;border-radius:15px;background:#ffffff22;display:grid;place-items:center;font-size:27px}.logo h1{margin:0;font-size:25px}.logo p{margin:4px 0 0;opacity:.85;font-size:12px}
+.adminBtn{background:#ffffff18;color:white;border:1px solid #ffffff50;padding:11px 16px;border-radius:13px}
+.hero{max-width:1100px;margin:30px auto 0}.hero h2{font-size:30px;margin:0 0 9px}.hero p{margin:0;opacity:.9}
+.wrap{max-width:1100px;margin:-12px auto 40px;padding:0 15px}
+.panel{background:white;border-radius:22px;padding:20px;box-shadow:0 10px 35px #0b5b5510;margin-bottom:22px}
+.sectionTitle{display:flex;align-items:center;gap:10px;margin:0 0 15px;font-size:20px}.sectionTitle span{font-size:23px}
+.search{display:flex;gap:10px;flex-wrap:wrap}.search input,.search select,.form input,.form select{flex:1;min-width:200px;padding:14px;border:1px solid #d8e8e6;border-radius:13px;background:#fbfefe;outline:none}.search input:focus,.form input:focus,.form select:focus{border-color:#0b9c90}
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:11px}.service{padding:16px 10px;border:1px solid #e1efed;background:#f8fcfc;border-radius:16px;text-align:center;color:#17625d}.service b{display:block;font-size:26px;margin-bottom:6px}.service.active{background:#e5f8f5;border-color:#0b9c90;box-shadow:0 4px 15px #0b9c9018}
+.nurses{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:16px}.card{border:1px solid #e1eeec;border-radius:19px;overflow:hidden;background:#fff;box-shadow:0 6px 20px #123c3910}.photo{height:170px;background:linear-gradient(135deg,#dff5f1,#f3fbfa);display:flex;align-items:center;justify-content:center;overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover}.placeholder{font-size:60px}.cardBody{padding:16px}.name{font-size:19px;font-weight:bold;margin-bottom:8px}.meta{color:#5f7775;font-size:13px;margin:5px 0}.price{font-size:20px;font-weight:bold;color:#087f75;margin:12px 0}.order{width:100%;padding:13px;background:#0b9488;color:#fff;border-radius:12px;font-weight:bold}.order:hover{background:#08786f}
+.empty{text-align:center;padding:35px;color:#748987}.admin{display:none}.admin.show{display:block}.modal{position:fixed;inset:0;background:#102c2a99;display:none;align-items:center;justify-content:center;padding:16px;z-index:10}.modal.show{display:flex}.box{background:#fff;border-radius:23px;padding:22px;width:min(520px,100%);max-height:92vh;overflow:auto}.close{float:left;background:#edf6f5;width:36px;height:36px;border-radius:10px}.form{display:grid;gap:11px}.form label{font-size:13px;font-weight:bold;color:#416360}.add{background:#0b9488;color:white;padding:14px;border-radius:13px;font-weight:bold}.danger{min-height:38px;background:#fff0f0;color:#bd3b3b;padding:9px 12px;border-radius:10px}.adminList{display:grid;gap:9px;margin-top:15px}.adminRow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px;background:#f7fbfb;border-radius:12px}.adminNurseInfo{display:flex;align-items:center;gap:10px;min-width:0}.adminThumb{width:52px;height:52px;border-radius:12px;object-fit:cover;background:#e7f5f2;display:block}.adminThumbPlaceholder{width:52px;height:52px;border-radius:12px;background:#e7f5f2;display:grid;place-items:center;font-size:25px;flex:none}.adminActions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}.editBtn{min-height:38px;background:#e9f3ff;color:#1765a5;padding:8px 10px;border-radius:9px}.hideBtn{min-height:38px;background:#fff6df;color:#9a6b00;padding:8px 10px;border-radius:9px}.showBtn{min-height:38px;background:#e8f8ee;color:#19713a;padding:8px 10px;border-radius:9px}.adminRow.hiddenNurse{opacity:.55}.adminRow small{color:#657b79}.statusBox{display:block;width:100%;min-height:42px;box-sizing:border-box;border:0;margin-top:6px;padding:8px 10px;border-radius:9px;font-size:12px;font-weight:bold;cursor:pointer}.statusAvailable{background:#e8f8ee;color:#19713a}.statusUnavailable{background:#fff0f0;color:#bd3b3b}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(100px);background:#173b3a;color:#fff;padding:13px 18px;border-radius:13px;transition:.3s;z-index:20}.toast.show{transform:translateX(-50%) translateY(0)}
+.footer{text-align:center;color:#718683;padding:20px;font-size:12px}
+@media(max-width:600px){.hero h2{font-size:24px}.top{align-items:flex-start}.adminBtn{padding:9px 11px}.logo h1{font-size:21px}.wrap{padding:0 10px}.panel{padding:15px}.services{grid-template-columns:repeat(2,1fr)}}
+.actionBox{width:100%;min-height:42px;border:0;border-radius:12px;font-weight:800;font-size:13px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.06);transition:.2s}
+.actionBox:active{transform:scale(.97)}
+.availabilitySelect{appearance:none;text-align:center;background:#e8f8ee;color:#19713a;padding:0 8px;outline:none;border:1px solid #ccebd8}
+.availabilitySelect option{background:#fff;color:#222}
+.adminActions .editBtn{background:#eaf4ff;color:#1769aa}
+.adminActions .danger{background:#fff0f0;color:#c63c3c}
+.adminActions .hideBtn,.adminActions .showBtn{background:#f3f1ff;color:#6652b8}
+</style>
+</head>
+<body>
+<header class="header">
+ <div class="top">
+  <div class="logo"><div class="logoIcon">⚕</div><div><h1>رعاية</h1><p>خدمات التمريض والرعاية المنزلية</p></div></div>
+  <button class="adminBtn" onclick="openAdmin()">⚙ الإدارة</button>
+ </div>
+ <div class="hero"><h2>رعايتك الصحية في منزلك</h2><p>اختر حالتك أو الخدمة التي تحتاجها، وتعرّف على الممرضين المتاحين لطلب الخدمة.</p></div>
+</header>
+
+<main class="wrap">
+ <section class="panel">
+  <h3 class="sectionTitle"><span>🔎</span> ابحث عن الخدمة المناسبة</h3>
+  <div class="search"><input id="search" placeholder="ابحث عن خدمة مثل: حقن أو ضغط..." oninput="selectedService='';render()"><select id="filter" onchange="render()"><option value="">كل الخدمات</option></select></div>
+ </section>
+
+ <section class="panel">
+  <h3 class="sectionTitle"><span>🩺</span> الخدمات المنزلية</h3>
+  <div class="services" id="services"></div>
+ </section>
+
+ <section class="panel">
+  <h3 class="sectionTitle"><span>👩‍⚕️</span> الممرضون المتاحون</h3>
+  <div class="nurses" id="nurses"></div>
+ </section>
+ <div class="footer">رعاية • منصة لعرض خدمات التمريض المنزلي والتواصل مع مقدم الخدمة</div>
+</main>
+
+<div class="modal" id="modal">
+ <div class="box">
+  <button class="close" onclick="closeModal()">✕</button>
+  <h2 id="modalTitle">الإدارة</h2>
+  <div id="modalContent"></div>
+ </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const WA="201203438254";
+const PASSWORD="2535";
+
+const services=[
+["💉","حقن"],["🩹","غيار"],["💧","محاليل"],["🩺","ضغط"],["🩸","سكر"],
+["💊","أدوية"],["🧴","جروح"],["🧪","تحاليل"],["🫧","كانيولا"],["🧷","قسطرة"],
+["🫀","تغيير ضماد"],["🧯","إسعافات"]
+];
+
+// ===== التخزين السحابي المشترك بين كل الأجهزة =====
+const CLOUD_URL="https://raaya-e0720-default-rtdb.firebaseio.com/raaya_nurses.json";
+
+const DEFAULT_NURSES=[];
+
+let nurses=JSON.parse(localStorage.getItem("raaya_nurses")||"null")||DEFAULT_NURSES;
+let selectedService="";
+nurses=nurses.map(n=>({...n,hidden:!!n.hidden,available:n.available!==false}));
+let cloudReady=false;
+
+function localSave(){
+ try{
+  localStorage.setItem("raaya_nurses",JSON.stringify(nurses));
+  return true;
+ }catch(e){
+  toast("الصورة كبيرة جدًا أو مساحة التخزين ممتلئة");
+  return false;
+ }
+}
+
+let cloudStream=null;
+function stopCloudListener(){try{if(cloudStream){cloudStream.close();cloudStream=null}}catch(e){}}
+function startCloudListener(){stopCloudListener();try{cloudStream=new EventSource(CLOUD_URL);cloudStream.addEventListener("put",e=>{try{applyCloudEvent(JSON.parse(e.data))}catch(err){console.warn(err)}});cloudStream.addEventListener("patch",e=>{try{applyCloudEvent(JSON.parse(e.data),true)}catch(err){console.warn(err)}});cloudStream.onopen=()=>{cloudReady=true;render()};cloudStream.onerror=()=>{cloudReady=false;render()}}catch(e){cloudReady=false;render();setTimeout(startCloudListener,3000)}}
+function applyCloudEvent(ev,patch=false){if(!ev)return;const path=String(ev.path||"/"),data=ev.data;if(path==="/"){if(Array.isArray(data)){nurses=data.map(n=>({...n,hidden:!!n.hidden,available:n.available!==false}));localSave();cloudReady=true;render();return}if(data===null){nurses=[];localSave();cloudReady=true;render();return}}const m=path.match(/^\/(\d+)(?:\/(.*))?$/);if(m){const i=Number(m[1]),child=m[2];if(child){if(!nurses[i])nurses[i]={name:"",price:"",image:"",services:[],hidden:false,available:true};let cur=nurses[i],parts=child.split("/");for(let j=0;j<parts.length-1;j++){if(cur[parts[j]]==null)cur[parts[j]]={};cur=cur[parts[j]]}cur[parts[parts.length-1]]=data}else nurses[i]=data?{...data,hidden:!!data.hidden,available:data.available!==false}:undefined;nurses=nurses.filter(Boolean).map(n=>({...n,hidden:!!n.hidden,available:n.available!==false}));localSave();cloudReady=true;render();return}fetch(CLOUD_URL,{cache:"no-store"}).then(r=>r.json()).then(d=>{if(Array.isArray(d)){nurses=d.map(n=>({...n,hidden:!!n.hidden,available:n.available!==false}));localSave();cloudReady=true;render()}}).catch(()=>{})}
+function stopCloudListener(){
+ try{ if(cloudStream){cloudStream.close();cloudStream=null;} }catch(e){}
+}
+
+function normalizeCloud(data){
+ if(!Array.isArray(data)) return null;
+ return data.map(n=>({...n,hidden:!!n.hidden,available:n.available!==false}));
+}
+
+function refreshFromCloud(){
+ fetch(CLOUD_URL,{cache:"no-store"})
+  .then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.json();})
+  .then(data=>{const v=normalizeCloud(data);if(v){nurses=v;localSave();cloudReady=true;render();}})
+  .catch(e=>console.warn("Firebase refresh failed:",e));
+}
+
+function startCloudListener(){
+ stopCloudListener();
+ try{
+  cloudStream=new EventSource(CLOUD_URL);
+  cloudStream.addEventListener("put",refreshFromCloud);
+  cloudStream.addEventListener("patch",refreshFromCloud);
+  cloudStream.onopen=()=>{cloudReady=true;render();console.log("Firebase realtime connected");};
+  cloudStream.onerror=()=>{cloudReady=false;render();console.warn("Firebase realtime connection interrupted; retrying...");};
+ }catch(e){
+  cloudReady=false;render();
+  console.warn("Realtime listener failed:",e);
+  setTimeout(startCloudListener,3000);
+ }
+}
+
+async function removeOriginalDefaultNurse(){
+  try{
+    const res=await fetch(CLOUD_URL,{cache:"no-store"});
+    if(!res.ok) return;
+    const data=await res.json();
+    if(Array.isArray(data) && data.length===1){
+      const n=data[0]||{};
+      const isOriginalDefault = n.name==="كيفن" && String(n.price)==="250" &&
+        Array.isArray(n.services) && n.services.includes("حقن") &&
+        n.services.includes("ضغط") && n.services.includes("سكر") && !n.image;
+      if(isOriginalDefault){
+        await fetch(CLOUD_URL,{method:"PUT",headers:{"Content-Type":"application/json"},body:"[]"});
+      }
+    }
+  }catch(e){
+    console.warn("Default nurse cleanup skipped:",e);
+  }
+}
+
+async function loadCloud(){
+ try{
+  const res=await fetch(CLOUD_URL,{cache:"no-store"});
+  if(!res.ok) throw new Error("HTTP "+res.status);
+  const data=await res.json();
+  const v=normalizeCloud(data);
+  if(v){nurses=v;localSave();}
+  else if(data===null){await saveCloud(true);}
+  cloudReady=true;render();startCloudListener();
+ }catch(e){
+  cloudReady=false;render();console.warn("Cloud load failed:",e);
+  setTimeout(startCloudListener,3000);
+ }
+}
+
+async function saveCloud(silent=false){
+ try{
+  const clean=nurses.map(n=>({
+   name:n.name||"",
+   price:String(n.price||""),
+   image:n.image||"",
+   services:Array.isArray(n.services)?n.services:[],
+   hidden:!!n.hidden,
+   available:n.available!==false
+  }));
+  const res=await fetch(CLOUD_URL,{
+   method:"PUT",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify(clean)
+  });
+  if(!res.ok) throw new Error("HTTP "+res.status);
+  cloudReady=true;
+  localSave();
+  if(!silent) toast("تم حفظ التغيير على كل الأجهزة");
+  return true;
+ }catch(e){
+  cloudReady=false;
+  localSave();
+  if(!silent) toast("تم الحفظ على هذا الهاتف فقط — تحقق من Firebase");
+  console.warn("Cloud save failed:",e);
+  return false;
+ }
+}
+
+function save(){
+ localSave();
+ saveCloud();
+ return true;
+}
+
+function esc(s){return String(s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+
+function serviceButtons(selected="",cls=""){
+ return services.map(x=>`<button type="button" class="service ${selected===x[1]?'active':''} ${cls}" onclick="choose('${x[1]}')"><b>${x[0]}</b>${x[1]}</button>`).join("");
+}
+
+function init(){
+  try{
+    const local=JSON.parse(localStorage.getItem("raaya_nurses")||"null");
+    if(Array.isArray(local) && local.length===1){
+      const n=local[0]||{};
+      if(n.name==="كيفن" && String(n.price)==="250" && Array.isArray(n.services) && n.services.includes("حقن") && n.services.includes("ضغط") && n.services.includes("سكر") && !n.image){
+        localStorage.removeItem("raaya_nurses");
+        nurses=[];
+      }
+    }
+  }catch(e){}
+  render();
+  removeOriginalDefaultNurse().finally(loadCloud);
+}
+function choose(s){
+ selectedService=s;
+ document.getElementById("search").value="";
+ render();
+ setTimeout(()=>document.getElementById("nurses").scrollIntoView({behavior:"smooth",block:"start"}),80);
+}
+
+function render(){
+ const q=document.getElementById("search").value.trim().toLowerCase();
+ const f=selectedService;
+
+ const visibleServices=services.filter(x=>!q || x[1].toLowerCase().includes(q));
+ document.getElementById("services").innerHTML=visibleServices.length
+ ? visibleServices.map(x=>`<button type="button" class="service ${f===x[1]?'active':''}" onclick="choose('${x[1]}')"><b>${x[0]}</b>${x[1]}</button>`).join("")
+ : `<div class="empty">لم نجد هذه الخدمة. جرّب كلمة أخرى.</div>`;
+
+ let list=nurses.filter(n=>!n.hidden && n.available!==false).filter(n=>{
+   const matchesSelected=!f || n.services.includes(f);
+   const matchesSearch=!q ||
+     n.name.toLowerCase().includes(q) ||
+     n.services.some(service=>service.toLowerCase().includes(q));
+   return matchesSelected && matchesSearch;
+ });
+
+ document.getElementById("nurses").innerHTML=list.length?list.map(n=>`
+ <article class="card">
+  <div class="photo">${n.image?`<img src="${n.image}" alt="صورة ${esc(n.name)}">`:'<div class="placeholder">👩‍⚕️</div>'}</div>
+  <div class="cardBody">
+   <div class="name">${esc(n.name)}</div>
+   <div class="meta">✓ ممرض متاح</div>
+   <div class="meta">${n.services.map(x=>`<span style="display:inline-block;background:#edf8f6;border-radius:8px;padding:4px 7px;margin:3px">${esc(x)}</span>`).join("")}</div>
+   <div class="price">${esc(n.price)} جنيه</div>
+   <button class="order" onclick='order(${JSON.stringify(n.name)},${JSON.stringify(n.price)})'>📱 طلب هذا الممرض</button>
+  </div>
+ </article>`).join(""):`<div class="empty">لا يوجد ممرض متاح بهذه الخدمة أو البحث.</div>`;
+}
+
+function order(name,price){
+ let service=selectedService||"خدمة تمريضية";
+ let msg=`مرحبًا، أريد طلب الممرض/ة ${name} لخدمة: ${service}. السعر المعلن: ${price} جنيه.`;
+ location.href="https://wa.me/"+WA+"?text="+encodeURIComponent(msg);
+}
+
+function openAdmin(){
+ document.getElementById("modalTitle").textContent="دخول الإدارة";
+ document.getElementById("modalContent").innerHTML=`
+ <div class="form">
+  <label>كلمة مرور الإدارة</label>
+  <input id="pass" type="password" inputmode="numeric" maxlength="4" placeholder="أدخل كلمة المرور">
+  <button class="add" onclick="login()">دخول الإدارة</button>
+ </div>`;
+ document.getElementById("modal").classList.add("show");
+}
+
+function login(){
+ if(document.getElementById("pass").value===PASSWORD)adminPanel();
+ else toast("كلمة المرور غير صحيحة");
+}
+
+function adminPanel(editIndex=null){
+ const editing=editIndex!==null ? nurses[editIndex] : null;
+ document.getElementById("modalTitle").textContent=editing?"تعديل بيانات الممرض":"إدارة الممرضين";
+ document.getElementById("modalContent").innerHTML=`
+ <div class="form">
+  <label>إضافة اسم الممرض</label>
+  <input id="nName" type="text" autocomplete="off" placeholder="مثال: كيفن" value="${editing?esc(editing.name):""}">
+  <label>المبلغ بالجنيه</label>
+  <input id="nPrice" type="number" placeholder="مثال: 250" value="${editing?esc(editing.price):""}">
+  <label>حالة الممرض</label>
+  <select id="nAvailable">
+   <option value="true" ${!editing||editing.available!==false?"selected":""}>متاح</option>
+   <option value="false" ${editing&&editing.available===false?"selected":""}>غير متاح</option>
+  </select>
+  <label>صورة الممرض</label>
+  <input id="nImage" type="file" accept="image/*">
+  ${editing&&editing.image?`<small style="color:#54706d">الصورة الحالية موجودة. اختر صورة جديدة إذا أردت تغييرها.</small>`:""}
+  <label>اختر الخدمات</label>
+  <div id="adminServices" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px">
+   ${services.map(x=>`<button type="button" class="service adminService ${editing&&editing.services.includes(x[1])?'active':''}" data-service="${x[1]}" onclick="toggleAdminService(this)"><b>${x[0]}</b>${x[1]}</button>`).join("")}
+  </div>
+  <button class="add" onclick="${editing?`updateNurse(${editIndex})`:`addNurse()`}">${editing?"حفظ التعديل":"＋ إضافة الممرض"}</button>
+ </div>
+ <div class="adminList">
+  ${nurses.length?nurses.map((n,i)=>`
+   <div class="adminRow ${n.hidden?'hiddenNurse':''}">
+    <div class="adminNurseInfo">
+     ${n.image?`<img class="adminThumb" src="${n.image}" alt="">`:`<div class="adminThumbPlaceholder">👩‍⚕️</div>`}
+     <div>
+       <b>${esc(n.name)}</b>
+       <br><small>${esc(n.price)} جنيه • ${esc(n.services.join("، "))}${n.hidden?" • مخفي":""}</small>
+     </div>
+    </div>
+    <div class="adminActions">
+      <button class="editBtn actionBox" onclick="adminPanel(${i})">تعديل</button>
+      <button class="danger actionBox" onclick="removeNurse(${i})">حذف</button>
+      <select class="availabilitySelect actionBox" onchange="setAvailability(${i},this.value)">
+        <option value="true" ${n.available!==false?'selected':''}>متاح</option>
+        <option value="false" ${n.available===false?'selected':''}>غير متاح</option>
+      </select>
+      <button class="${n.hidden?'showBtn':'hideBtn'} actionBox" onclick="toggleHide(${i})">${n.hidden?'إظهار':'إخفاء'}</button>
+    </div>
+   </div>`).join(""):`<div class="empty">لا يوجد ممرضون مضافون حاليًا.</div>`}
+ </div>`;
+}
+
+function toggleAdminService(btn){
+ btn.classList.toggle("active");
+}
+
+function addNurse(){
+ const nameEl=document.getElementById("nName");
+ const priceEl=document.getElementById("nPrice");
+ const imageEl=document.getElementById("nImage");
+ const name=nameEl ? nameEl.value.trim() : "";
+ const price=priceEl ? priceEl.value.trim() : "";
+ const file=imageEl && imageEl.files ? imageEl.files[0] : null;
+ const selected=[...document.querySelectorAll("#adminServices .adminService.active")]
+   .map(b=>b.getAttribute("data-service")).filter(Boolean);
+
+ if(!name){toast("اكتب اسم الممرض فقط");nameEl?.focus();return}
+ if(!price){toast("اكتب المبلغ");priceEl?.focus();return}
+ if(!selected.length){toast("اختر خدمة واحدة على الأقل");return}
+
+ const finish=(image)=>{
+   const old=nurses.length;
+   nurses.push({name,price,image,services:selected});
+   if(!save()){
+     nurses.splice(old,1);
+     return;
+   }
+   render();
+   adminPanel();
+   toast("تمت إضافة الممرض بنجاح");
+ };
+
+ if(!file){finish("");return}
+
+ const reader=new FileReader();
+ reader.onload=()=>{
+   const img=new Image();
+   img.onload=()=>{
+     const max=700;
+     let w=img.width,h=img.height;
+     if(w>max||h>max){
+       const ratio=Math.min(max/w,max/h);
+       w=Math.round(w*ratio);h=Math.round(h*ratio);
+     }
+     const canvas=document.createElement("canvas");
+     canvas.width=w;canvas.height=h;
+     const ctx=canvas.getContext("2d");
+     ctx.drawImage(img,0,0,w,h);
+     finish(canvas.toDataURL("image/jpeg",0.72));
+   };
+   img.onerror=()=>toast("تعذر قراءة الصورة");
+   img.src=reader.result;
+ };
+ reader.onerror=()=>toast("تعذر قراءة الصورة");
+ reader.readAsDataURL(file);
+}
+
+function updateNurse(i){
+ const name=document.getElementById("nName").value.trim();
+ const price=document.getElementById("nPrice").value.trim();
+ const available=document.getElementById("nAvailable").value==="true";
+ const file=document.getElementById("nImage").files[0];
+ const selected=[...document.querySelectorAll("#adminServices .adminService.active")].map(b=>b.dataset.service);
+
+ if(!name){toast("اكتب اسم الممرض");return}
+ if(!price){toast("اكتب المبلغ");return}
+ if(!selected.length){toast("اختر خدمة واحدة على الأقل");return}
+
+ const finish=(image)=>{
+   nurses[i]={...nurses[i],name,price,services:selected,image:image||nurses[i].image};
+   save();
+   render();
+   adminPanel();
+   toast("تم تعديل بيانات الممرض");
+ };
+
+ if(file){
+   const reader=new FileReader();
+   reader.onload=()=>{
+     const img=new Image();
+     img.onload=()=>{
+       const max=700;
+       let w=img.width,h=img.height;
+       if(w>max||h>max){const r=Math.min(max/w,max/h);w=Math.round(w*r);h=Math.round(h*r)}
+       const c=document.createElement("canvas");
+       c.width=w;c.height=h;
+       c.getContext("2d").drawImage(img,0,0,w,h);
+       finish(c.toDataURL("image/jpeg",0.72));
+     };
+     img.src=reader.result;
+   };
+   reader.readAsDataURL(file);
+ }else finish("");
+}
+
+function updateNurse(i){
+ const name=document.getElementById("nName").value.trim();
+ const price=document.getElementById("nPrice").value.trim();
+ const file=document.getElementById("nImage").files[0];
+ const selected=[...document.querySelectorAll("#adminServices .adminService.active")].map(b=>b.dataset.service);
+ if(!name){toast("اكتب اسم الممرض");return}
+ if(!price){toast("اكتب المبلغ");return}
+ if(!selected.length){toast("اختر خدمة واحدة على الأقل");return}
+ const old=nurses[i];
+ const finish=image=>{
+  nurses[i]={...old,name,price,available,image:image||old.image,services:selected};
+  save();render();adminPanel();toast("تم تعديل بيانات الممرض");
+ };
+ if(!file){finish("");return}
+ const reader=new FileReader();
+ reader.onload=()=>{
+  const img=new Image();
+  img.onload=()=>{
+   const max=700;let w=img.width,h=img.height;
+   if(w>max||h>max){const z=Math.min(max/w,max/h);w=Math.round(w*z);h=Math.round(h*z)}
+   const c=document.createElement("canvas");c.width=w;c.height=h;c.getContext("2d").drawImage(img,0,0,w,h);
+   finish(c.toDataURL("image/jpeg",.72));
+  };
+  img.src=reader.result;
+ };
+ reader.readAsDataURL(file);
+}
+function setAvailability(i,v){
+ nurses[i].available=(v==="true");
+ save(); render(); adminPanel(); toast(nurses[i].available?"تم جعل الممرض متاحًا":"تم جعل الممرض غير متاح");
+}
+function toggleAvailability(i){
+ nurses[i].available=nurses[i].available===false;
+ save();render();adminPanel();
+ toast(nurses[i].available?"الممرض أصبح متاحًا":"الممرض أصبح غير متاح");
+}
+function toggleHide(i){
+ nurses[i].hidden=!nurses[i].hidden;
+ save();render();adminPanel();
+ toast(nurses[i].hidden?"تم إخفاء الممرض":"تم إظهار الممرض");
+}
+function removeNurse(i){
+  if(i<0 || i>=nurses.length) return;
+  if(confirm("هل تريد حذف هذا الممرض؟")){
+    nurses.splice(i,1);
+    save();
+    adminPanel();
+    render();
+    toast(nurses.length ? "تم الحذف" : "تم حذف آخر ممرض — الموقع أصبح بدون ممرضين");
+  }
+}
+function removeAllNurses(){
+  if(!nurses.length){toast("لا يوجد ممرضون للحذف");return;}
+  if(confirm("هل تريد حذف جميع الممرضين نهائيًا؟")){
+    nurses=[];
+    save();
+    adminPanel();
+    render();
+    toast("تم حذف جميع الممرضين");
+  }
+}
+
+function closeModal(){document.getElementById("modal").classList.remove("show")}
+function toast(t){
+ let x=document.getElementById("toast");
+ x.textContent=t;x.classList.add("show");
+ setTimeout(()=>x.classList.remove("show"),2200);
+}
+init();
+window.addEventListener("beforeunload",stopCloudListener);
+</script>
+</body>
+</html>
